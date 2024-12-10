@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'data_wizard',
+    'data_wizard.sources',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

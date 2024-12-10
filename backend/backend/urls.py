@@ -24,4 +24,5 @@ urlpatterns = [
     path('HourlyData/',include('HourlyData.urls')),
     path('InstrumentCost/',include('InstrumentCost.urls')),
     path('SiteInformation/',include('SiteInformation.urls')),
+    path('datawizard/', include('data_wizard.urls')),
 ]
