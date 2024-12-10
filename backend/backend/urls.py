@@ -20,4 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api.urls')),
+    path('EmissionFactor/',include('EmissionFactor.urls')),
+    path('HourlyData/',include('HourlyData.urls')),
+    path('InstrumentCost/',include('InstrumentCost.urls')),
+    path('SiteInformation/',include('SiteInformation.urls')),
+    path('datawizard/', include('data_wizard.urls')),
 ]
