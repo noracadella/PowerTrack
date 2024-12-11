@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from './logo.svg';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Card from './components/card.js'
+
+import './App.css';
+import React from "react";
+import Example from "./components/graph";
+import LineChartCard from './components/LineChartCard';
+import PieChartCard from './components/PieChartCard';
+import BarChartCard from './components/BarChartCard';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+
+
+
+
+const App = () => {
+    return (
+        <div className="app-container">
+            <Navbar />
+            <div className="main-layout">
+                <Sidebar />
+                <div className="dashboard">
+                    <header className="dashboard-header">
+                        <h1>Dashboard</h1>
+                    </header>
+                    <div className="dashboard-grid">
+                        <LineChartCard />
+                        <PieChartCard />
+                        <BarChartCard />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+
+
+    /*return(
+        <div>
+            <div className="header">
+                <Navbar  />
+            </div>
+            <div className="body">
+
+                <Example/>
+            </div>
+        </div>
+
+  );*/
 }
 
 export default App;

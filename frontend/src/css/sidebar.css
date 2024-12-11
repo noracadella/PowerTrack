@@ -1,0 +1,33 @@
+
+.sidebar {
+    width: 150px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-item {
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar-item:hover {
+    background-color: #007bff;
+    color: white;
+    transition: 0.3s ease;
+}

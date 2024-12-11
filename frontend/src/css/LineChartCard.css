@@ -1,0 +1,50 @@
+/* Contenedor del gráfico con título dentro de un rectángulo */
+.chart-container {
+    border: 2px solid #ddd; /* Borde suave */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Título del gráfico */
+.chart-title {
+    font-size: 18px; /* Tamaño de fuente del título */
+    margin-bottom: 15px; /* Espacio debajo del título */
+    color: #333; /* Color del título */
+    font-weight: bold;
+}
+
+/* Estilos para el área del gráfico */
+.chart {
+    background-color: #f9f9f9; /* Fondo del área del gráfico */
+    height: 300px; /* Altura del gráfico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.button-container {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+}
+.chart-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.chart-button:hover {
+    background-color: #0056b3;
+}
+
