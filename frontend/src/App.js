@@ -1,10 +1,8 @@
 //import logo from './logo.svg';
 
-import Card from './components/card.js'
 
 import './App.css';
 import React from "react";
-import Example from "./components/graph";
 import LineChartCard from './components/LineChartCard';
 import PieChartCard from './components/PieChartCard';
 import BarChartCard from './components/BarChartCard';
