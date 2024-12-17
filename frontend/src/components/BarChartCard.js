@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import "../css/LineChartCard.css"
 
 const data = [
-    { name: '01/01', kWh: 796, amt: 2400 },
+    { name: '01/01', kWh: 796, pa: 140, amt: 2400 },
     { name: '02/01', kWh: 545,  amt: 2210 },
     { name: '03/01', kWh: 295,  amt: 2290 },
     { name: '04/01', kWh: 286,  amt: 2000 },
@@ -20,11 +20,7 @@ const BarChartCard = () => {
         <div className="chart-container">
             <div className="chart-header">
                 <h1 className="chart-title">Solar Production</h1>
-                <div className="button-container">
-                    <button className="chart-button">Hourly</button>
-                    <button className="chart-button">Weekly</button>
-                    <button className="chart-button">Monthly</button>
-                </div>
+
             </div>
             <div className="chart">
                 <ResponsiveContainer width="100%" height={300}>
@@ -35,7 +31,8 @@ const BarChartCard = () => {
                         <Tooltip />
                         <Legend />
                         {/* Bar components replacing Line components */}
-                        <Bar dataKey="kWh" fill="#8884d8" barSize={20} />
+                        <Bar dataKey="kWh" stackId="a" fill="#8884d8" barSize={20} />
+                        <Bar dataKey="pa" stackId="a" fill="#8884d8" barSize={20} />
 
                     </BarChart>
                 </ResponsiveContainer>
