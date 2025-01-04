@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "../css/LineChartCard.css";
-
-const COLORS = ['#1e5631', '#50b83c']; // Colores para Grid y Gas
+//#f49e40
+//'#50b83c'
+const COLORS = ['#1e5631', '#f49e40']; // Colores para Grid y Gas
 
 const PieChartCard = ({ year, month }) => {
     const [data, setData] = useState([]);
@@ -19,10 +20,10 @@ const PieChartCard = ({ year, month }) => {
                 const json = await response.json();
 
                 const totalGrid = Math.min(100, parseFloat(json.total_grid_percentage.toFixed(2)));
-                const totalGas = Math.min(100, parseFloat(json.total_gas_percentage.toFixed(2)));
+                const totalSolar = Math.min(100, parseFloat(json.total_solar_percentage.toFixed(2)));
                 const formattedData = [
                     { name: 'Grid', value: totalGrid },
-                    { name: 'Gas', value: totalGas }
+                    { name: 'Solar', value: totalSolar }
                 ];
                 setData(formattedData);
 

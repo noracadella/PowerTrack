@@ -10,6 +10,7 @@ import ChartButtons from "./components/ChartButton";
 import LineChartComp from "./components/LineChartComp";
 import BarChartPrice from "./components/BarChartPrice";
 import StatCard from "./components/StatCard";
+import InstrumentCostCard from "./components/InstrumentCostCard";
 
 
 const App = () => {
@@ -31,11 +32,11 @@ const App = () => {
 
 
                     <div className="dashboard-grid">
-                        <BarChartCard/>
-                        <PieChartCard/>
-                        <LineChartCard/>
-                        <LineChartComp/>
-                        <BarChartPrice/>
+                        <BarChartCard activeChart={activeChart}/>
+                        <PieChartCard />
+                        <LineChartCard activeChart={activeChart}/>
+                        <InstrumentCostCard />
+                        <BarChartPrice activeChart={activeChart}/>
                     </div>
 
                 </div>

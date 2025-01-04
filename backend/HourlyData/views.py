@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-from django.db.models import Sum
+from django.db.models import Sum, F
 
 from HourlyData.serializers import HourlyDataSerializer
 
@@ -56,9 +56,32 @@ class DailySolarProductionView(ListAPIView):
 
         # Construir la respuesta
         response_data = {
-            "date": f"{month:02d}-{day:02d}",
-            "hourly_totals": list(data)
+            "day": day,
+            "month": month,
+            "hourly_consumption": list(data)
         }
+        return Response(response_data)
+
+class HourlyConsumptionView(ListAPIView):
+    def get(self, request, month, day):
+        # Filtrar los datos para el día, mes y año especificados
+        data = (
+            HourlyData.objects.filter(day=day, month=month)
+            .values('hour')  # Agrupar por hora
+            .annotate(
+                grid_supply=Sum('site_consumption_grid_supply'),
+                solar_supply=Sum('onsite_solar_system_production')
+            )
+            .order_by('hour')  # Ordenar por hora
+        )
+
+        # Construir la respuesta
+        response_data = {
+            "day": day,
+            "month": month,
+            "hourly_consumption": list(data)
+        }
+
         return Response(response_data)
 
 class MonthlyConsumptionView(ListAPIView):
@@ -69,7 +92,7 @@ class MonthlyConsumptionView(ListAPIView):
             .values('day')  # Agrupar por día
             .annotate(
                 total_grid_supply=Sum('site_consumption_grid_supply'),
-                total_natural_gas=Sum('site_consumption_natural_gas')
+                total_solar=Sum('onsite_solar_system_production')
             )
             .order_by('day')  # Ordenar por día
         )
@@ -82,10 +105,27 @@ class MonthlyConsumptionView(ListAPIView):
 
         return Response(response_data)
 
-from django.db.models import Sum, F
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import HourlyData
+class YearlyConsumptionView(ListAPIView):
+    def get(self, request):
+        # Filtrar los datos para el año especificado
+        data = (
+            HourlyData.objects.filter()
+            .values('month')  # Agrupar por mes
+            .annotate(
+                total_grid_supply=Sum('site_consumption_grid_supply'),
+                total_solar=Sum('onsite_solar_system_production')
+            )
+            .order_by('month')  # Ordenar por mes
+        )
+
+        # Construir la respuesta
+        response_data = {
+            "monthly_consumption": list(data)
+        }
+
+        return Response(response_data)
+
+
 
 class MonthlyConsumptionPriceView(ListAPIView):
     def get(self, request, month):
@@ -95,10 +135,8 @@ class MonthlyConsumptionPriceView(ListAPIView):
         # Calcular el consumo mensual multiplicando por los precios correspondientes
         monthly_consumption = data.annotate(
             grid_cost=F('site_consumption_grid_supply') * F('grid_price'),
-            gas_cost=F('site_consumption_natural_gas') * F('ng_price')
         ).values('day').annotate(
             total_grid_cost=Sum('grid_cost'),
-            total_gas_cost=Sum('gas_cost')
         )
 
         # Formatear los datos de la respuesta
@@ -109,49 +147,70 @@ class MonthlyConsumptionPriceView(ListAPIView):
 
         return Response(response_data)
 
+class YearlyConsumptionPriceView(ListAPIView):
+    def get(self, request):
+        # Filtrar los datos del año específico
+        data = HourlyData.objects.filter()
+
+        # Calcular el consumo anual multiplicando por los precios correspondientes
+        yearly_consumption = data.annotate(
+            grid_cost=F('site_consumption_grid_supply') * F('grid_price')
+        ).values('month').annotate(
+            total_grid_cost=Sum('grid_cost')
+        ).order_by('month')
+
+        # Formatear los datos de la respuesta
+        response_data = {
+
+            "monthly_costs": list(yearly_consumption)
+        }
+
+        return Response(response_data)
+
+class HourlyConsumptionPriceView(ListAPIView):
+    def get(self, request, month, day):
+        # Filtrar los datos del día específico
+        data = HourlyData.objects.filter(day=day, month=month)
+
+        # Calcular el consumo por hora multiplicando por los precios correspondientes
+        hourly_consumption = data.annotate(
+            grid_cost=F('site_consumption_grid_supply') * F('grid_price')
+        ).values('hour').annotate(
+            total_grid_cost=Sum('grid_cost')
+        ).order_by('hour')
+
+        # Formatear los datos de la respuesta
+        response_data = {
+            "day": day,
+            "hourly_costs": list(hourly_consumption)
+        }
+
+        return Response(response_data)
+
 
 class MonthlyConsumptionPercentageView(ListAPIView):
     def get(self, request, month):
         # Sumar los consumos de Grid y Gas para el mes especificado
         data = HourlyData.objects.filter(month=month).aggregate(
             total_grid=Sum('site_consumption_grid_supply'),
-            total_gas=Sum('site_consumption_natural_gas')
+            total_solar=Sum('onsite_solar_system_production')
         )
 
         total_grid = data['total_grid'] or 0
-        total_gas = data['total_gas'] or 0
-        total_consumption = total_grid + total_gas
+        total_solar = data['total_solar'] or 0
+        total_consumption = total_grid + total_solar
 
         if total_consumption > 0:
             percentage_grid = (total_grid / total_consumption) * 100
-            percentage_gas = (total_gas / total_consumption) * 100
+            percentage_solar = (total_solar / total_consumption) * 100
         else:
-            percentage_grid = percentage_gas = 0
+            percentage_grid = percentage_solar = 0
 
         response_data = {
             "month": month,
             "total_grid_percentage": percentage_grid,
-            "total_gas_percentage": percentage_gas
+            "total_solar_percentage": percentage_solar
         }
 
         return Response(response_data)
 
-class MonthlyConsumptionAndProduction(ListAPIView):
-    def get(self, request, month):
-        # Obtener la suma de grid y gas por día, con la producción solar
-        data = (
-            HourlyData.objects.filter(month=month)
-            .values('day')
-            .annotate(
-                consumption=Sum('site_consumption_grid_supply') + Sum('site_consumption_natural_gas'),  # Suma de consumo
-                solar_production=Sum('onsite_solar_system_production')
-            )
-            .order_by('day')  # Ordenar por día
-        )
-
-        response_data = {
-            "month": month,
-            "daily_data": list(data)
-        }
-
-        return Response(response_data)
