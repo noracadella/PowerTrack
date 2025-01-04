@@ -20,6 +20,12 @@
 .dashboard-grid > div:nth-child(5) {
   grid-column: span 2;
 }
+.dashboard-grid > div:nth-child(6) {
+  grid-column: span 2;
+}
+.dashboard-grid > div:nth-child(7) {
+  grid-column: span 2;
+}
 
 .main-layout {
   display: flex;

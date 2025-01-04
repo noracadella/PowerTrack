@@ -11,6 +11,7 @@ import LineChartComp from "./components/LineChartComp";
 import BarChartPrice from "./components/BarChartPrice";
 import StatCard from "./components/StatCard";
 import InstrumentCostCard from "./components/InstrumentCostCard";
+import EmissionList from "./components/EmissionList";
 
 
 const App = () => {
@@ -37,6 +38,8 @@ const App = () => {
                         <LineChartCard activeChart={activeChart}/>
                         <InstrumentCostCard />
                         <BarChartPrice activeChart={activeChart}/>
+                        <LineChartComp activeChart={activeChart}/>
+                        <EmissionList />
                     </div>
 
                 </div>

@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "../css/LineChartCard.css";
-//#f49e40
-//'#50b83c'
-const COLORS = ['#1e5631', '#f49e40']; // Colores para Grid y Gas
+
+const COLORS = ['#1e5631', '#50b83c']; // Colores para Grid y Gas
 
 const PieChartCard = ({ year, month }) => {
     const [data, setData] = useState([]);
