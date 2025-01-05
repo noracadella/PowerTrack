@@ -1,0 +1,45 @@
+.risk-selector-container {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .dropdown-label {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .risk-inline-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .risk-dropdown {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    flex: 1;
+    max-width: 150px;
+  }
+  
+  .risk-description-inline {
+    margin-left: 12px;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+    flex: 3;
+  }
+  
+  .risk-description-inline strong {
+    color: #333;
+    margin-right: 5px;
+  }
+  
