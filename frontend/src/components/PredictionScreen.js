@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BarChartCard from "./BarChartCard";
 import "../css/RiskSelector.css";
 
 const PredictionScreen = () => {
@@ -39,6 +40,8 @@ const PredictionScreen = () => {
                     </div>
                 )}
             </div>
+
+            <BarChartCard activeChart={"Monthly"}/>
         </div>
     );
 };
