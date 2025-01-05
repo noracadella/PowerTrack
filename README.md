@@ -16,6 +16,9 @@ pip install -r requirements.txt
 # Fer migracions
 python manage.py makemigrations
 python manage.py migrate
+
+# Correr backend
+python manage.py runserver
 ```
 
 Afegir llibreria a `requirements.txt`
@@ -26,4 +29,10 @@ pip list | grep llibreria
 # llibreria x.0.0
 
 # Apuntar al fitxer llibreria==x.0.0
+```
+
+## Frontend
+```
+npm install
+npm start
 ```
