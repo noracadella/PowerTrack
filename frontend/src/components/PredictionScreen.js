@@ -17,7 +17,7 @@ const PredictionScreen = () => {
 
     return (
         <div>
-            <h1>Prediction Screen</h1>
+            <h1>Cost Projection</h1>
             {/* Aquí va el contenido de la pantalla Prediction */}
             <div className="risk-selector-container">
                 <label htmlFor="risk-dropdown" className="dropdown-label">
@@ -42,6 +42,19 @@ const PredictionScreen = () => {
             </div>
 
             <BarChartCard activeChart={"Monthly"}/>
+
+            <div className="budget-comparison">
+                <div className="budget-row">
+                    <div className="budget-item">
+                        <p className="small-text">Budget 2025</p>
+                        <p className="budget-value">50.000€</p>
+                    </div>
+                    <div className="budget-item">
+                        <p className="small-text">Expected 2026</p>
+                        <p className="budget-value">60.000€</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

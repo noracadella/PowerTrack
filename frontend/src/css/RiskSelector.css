@@ -43,3 +43,42 @@
     margin-right: 5px;
   }
   
+  .budget-comparison {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centra el contenido */
+  }
+  
+  .budget-row {
+    display: flex;
+    justify-content: space-evenly; /* Centra los presupuestos en la fila */
+    gap: 40px; /* Espaciado entre los presupuestos */
+    margin-top: 10px;
+  }
+  
+  .budget-item {
+    text-align: center; /* Centra el texto dentro de cada presupuesto */
+
+  }
+  
+  .small-text {
+    font-size: 14px;
+    color: #666; /* Color más sutil para el año */
+  }
+  
+  .budget-value {
+    font-size: 38px; /* Tamaño más grande para los valores */
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
+  .budget-item:nth-child(1) .budget-value {
+    color: #4caf50; /* Verde claro para el presupuesto del año pasado */
+  }
+  
+  .budget-item:nth-child(2) .budget-value {
+    color: #087f23; /* Verde oscuro para el presupuesto esperado */
+  }
