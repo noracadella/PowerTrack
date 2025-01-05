@@ -19,6 +19,7 @@ const Sidebar = () => {
 export default Sidebar;
 */
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/sidebar.css"
 
 const Sidebar = () => {
@@ -28,9 +29,9 @@ const Sidebar = () => {
                 <span>PowerTrack</span>
             </div>
             <ul className="sidebar-menu">
-                <li>Dashboard</li>
-                <li>Prediction</li>
-                <li>Simulation</li>
+                <li><Link to="/">Dashboard</Link></li>
+                <li><Link to="/prediction">Prediction</Link></li>
+                <li><Link to="/simulation">Simulation</Link></li>
             </ul>
         </aside>
     );

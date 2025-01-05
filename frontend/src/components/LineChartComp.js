@@ -4,7 +4,7 @@ import "../css/LineChartCard.css";
 
 const LineChartCard = ({ activeChart }) => {
     const [data, setData] = useState([]);
-    const [view, setView] = useState("Monthly");
+
 
     const fetchData = async (viewMode) => {
         try {

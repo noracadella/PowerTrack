@@ -5,7 +5,6 @@ import "../css/LineChartCard.css";
 
 const LineChartCard = ({activeChart}) => {
     const [data, setData] = useState([]); // Estado para almacenar los datos de la API
-    const [month, setMonth] = useState(1); // Estado para seleccionar el mes
 
     // Llamada a la API
     useEffect(() => {
