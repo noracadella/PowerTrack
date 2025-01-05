@@ -1,0 +1,25 @@
+.chart-buttons {
+    display: flex; /* Alinea los botones en una fila */
+    gap: 10px; /* Espacio entre botones */
+    margin-bottom: 20px; /* Espacio debajo de los botones */
+}
+
+.chart-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #1e5631; /* Color por defecto */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chart-button:hover {
+    background-color: #50b83c; /* Color al hacer hover */
+}
+
+.chart-button.active {
+    background-color: #50b83c; /* Color para el botón activo */
+    color: #fff;
+}
