@@ -1,0 +1,71 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  
+  /* Secciones */
+  .section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+  }
+  
+  /* Títulos */
+  .section-title {
+    color: #8ac441;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-left: 4px solid #8ac441;
+    padding-left: 8px;
+  }
+  
+  /* Lista */
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list li {
+    margin-bottom: 20px;
+  }
+  
+  .list p {
+    margin: 0 0 5px;
+    font-size: 14px;
+  }
+  
+  .date {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  /* Enlaces */
+  .link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #8ac441;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
