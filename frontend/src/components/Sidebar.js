@@ -30,7 +30,7 @@ const Sidebar = () => {
             </div>
             <ul className="sidebar-menu">
                 <li><Link to="/">Dashboard</Link></li>
-                <li><Link to="/prediction">Prediction</Link></li>
+                <li><Link to="/prediction">Cost Projection</Link></li>
                 <li><Link to="/simulation">Simulation</Link></li>
             </ul>
         </aside>
