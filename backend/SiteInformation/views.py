@@ -1,10 +1,15 @@
-from django.db.models import Sum, F
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from decimal import Decimal
+from django.db.models import Sum, Avg, F
 from .models import SiteInformation
+from decimal import Decimal
 from HourlyData.models import HourlyData
 from EmissionFactor.models import EmissionFactor
+
+"""def SiteInformation(request):
+    return render(request, "SiteInformationView.html")"""
+
 
 @api_view(['POST'])
 def simulate_strategy(request):
@@ -14,7 +19,14 @@ def simulate_strategy(request):
 
     # Filtrar los datos del año específico (por defecto, el año actual)
     data = HourlyData.objects.filter()
+    total_cost = 0.0
 
+
+	
+
+    total_emissions = 0.0
+
+	
     # Factores de reducción para el consumo de red
     reduction_factor = 1 - (len(sources) * 0.05)  # Reducción del 5% por cada fuente
     reduction_factor = max(0.85, reduction_factor)
@@ -62,35 +74,44 @@ def simulate_strategy(request):
         "Nuclear": 116.5,
     }
     source_emissions = {
-        "PV": 36,
-        "Wind": 13,
-        "Hydro": 11,
-        "Coal": 1170,
-        "NaturalGas": 520,
-        "Biomass": 230,
-        "Geothermal": 38,
-        "Nuclear": 5,
+        "PV": 36.0,
+        "Wind": 13.0,
+        "Hydro": 11.0,
+        "Coal": 1170.0,
+        "NaturalGas": 520.0,
+        "Biomass": 230.0,
+        "Geothermal": 38.0,
+        "Nuclear": 5.0,
     }
 
     total_cost = float(total_consumption)  # El costo total ajustado
     total_emissions = float(total_consumption2)
+
+    print(f"total_cost: {total_cost}") 
+    print(f"total_emissions: {total_emissions}") 
 
     # Calcular costos y emisiones de las nuevas fuentes seleccionadas
     for source in sources:
         additional_consumption = total_consumption * float(reduction_factor2)  # El 15% restante para las fuentes seleccionadas
         cost = additional_consumption * float(source_prices.get(source, 0))
         emissions = additional_consumption * float(source_emissions.get(source, 0))
-
-        print(f"Source: {source}, Additional consumption: {additional_consumption}, Cost: {cost}, Emissions: {emissions}")  # Debug: Imprime los valores por fuente
-
         total_cost += cost
         total_emissions += emissions
+        print(f"redu2: { float(reduction_factor2) }") 
+        print(f"costi: {  float(source_prices.get(source, 0)) }") 
+        print(f"emi: { float(source_emissions.get(source, 0)) }") 
+        print(f"Source: {source}, Additional consumption: {additional_consumption}, Cost: {cost}, Emissions: {emissions}")  # Debug: Imprime los valores por fuente
 
+        print(f"total_cost2: {total_cost}") 
+        print(f"total_emissions2: {total_emissions}") 
+    total_cost = round(total_cost,2)
+    total_emissions = round(total_emissions,2)
     # Respuesta final con el costo total y emisiones
     response_data = {
-        "total_cost": total_cost,
-        "total_emissions": total_emissions,
-        "total_consumption": total_consumption,
+        "totalCost": total_cost,
+        "totalEmissions": total_emissions,
+        "adjustedGridConsumption": total_consumption,
+        "strategy": sources,
     }
 
     return Response(response_data)

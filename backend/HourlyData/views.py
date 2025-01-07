@@ -218,4 +218,3 @@ class MonthlyConsumptionPercentageView(ListAPIView):
         }
 
         return Response(response_data)
-
