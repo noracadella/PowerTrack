@@ -3,6 +3,15 @@
   grid-template-columns: 2fr 1fr;
   gap: 20px;
 }
+.dashboard-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.dashboard-grid3 {
+
+  margin-top: 20px;
+}
 
 .dashboard-grid > div:nth-child(1){
   grid-column: span 1;
@@ -58,13 +67,24 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.energy-section2,
+.green-energy2,
+.stats-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .stats-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
 }
-
+.stats-section2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
 
 
 /* Estilos principales para toda la app */
@@ -130,6 +150,18 @@
   cursor: pointer;
 }
 
+.chart-button2 {
+  padding: 8px 16px;
+  font-size: 1.17em;
+  font-weight: bold;
+  line-height: 1.5;
+  background-color: #1e5631;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .chart-button:hover {
   background-color: #50b83c;
 }
@@ -137,8 +169,6 @@
   background-color: #50b83c; /* Nuevo color cuando está activo */
   color: #fff; /* Asegura que el texto sea blanco */
 }
-
-
 
 
 

@@ -68,8 +68,8 @@ const Simulation = () => {
           <h1>Energy Strategy Simulation</h1>
         </div>
 
-        <div className="dashboard-grid">
-          <div className="energy-section">
+        <div className="dashboard-grid2">
+          <div className="energy-section2">
             <h3>Select a parameter to modify:</h3>
             <label>
               <input
@@ -103,7 +103,7 @@ const Simulation = () => {
             </label>
           </div>
 
-          <div className="green-energy">
+          <div className="green-energy2">
             <h3>Select whether you want to increase or decrease:</h3>
             <label>
               <input
@@ -126,15 +126,32 @@ const Simulation = () => {
               Decrease
             </label>
           </div>
-
-          <div className="stats-section">
-            <button className="chart-button" onClick={generateStrategy}>
+        </div>
+        <div className="dashboard-grid3">
+          <div className="stats-section2">
+            <button className="chart-button2" onClick={generateStrategy}>
               Generate Strategy
             </button>
-            <h3>Recommendation:</h3>
-            <p>Selected sources: {result.strategy.join(", ")}</p>
-            <p>Total cost: {result.cost} $/MWh</p>
-            <p>Total emissions: {result.emissions} gCO2eq/kWh</p>
+
+            <div className="instrument-card" >
+                <div className="instrument-header">
+                    <span className="instrument-name">Selected sources: <br /> {result.strategy.join(", ")} </span>
+                    <span className="instrument-unit">(€/MWh)</span>
+                </div>
+            </div>
+            <div className="instrument-card" >
+                <div className="instrument-header">
+                    <span className="instrument-name">Total cost: <br /> {result.cost}</span>
+                    <span className="instrument-unit">(€/MWh)</span>
+                </div>   
+            </div>
+            <div className="instrument-card" >
+                <div className="instrument-header">
+                    <span className="instrument-name">Total emissions: <br /> {result.emissions}</span>
+                    <span className="instrument-unit">(gCO2eq/kWh)</span>
+                </div>
+            </div>
+            
           </div>
         </div>
       </div>
