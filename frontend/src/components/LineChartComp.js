@@ -28,6 +28,7 @@ const LineChartCard = ({ activeChart }) => {
             const formattedData = viewMode === "Daily" && json.hourly_emissions && Array.isArray(json.hourly_emissions)
                 ? json.hourly_emissions.map(item => ({
                     name: `Hour ${item.hour}`,
+
                     CarbonEmission: item.total_carbon_emission,
                 }))
                 : viewMode === "Monthly"

@@ -10,9 +10,8 @@ import LineChartComp from "./components/LineChartComp";
 import BarChartPrice from "./components/BarChartPrice";
 import InstrumentCostCard from "./components/InstrumentCostCard";
 import EmissionList from "./components/EmissionList";
-
-// Importa las otras pantallas que quieres agregar
 import PredictionScreen from "./components/PredictionScreen";
+import Simulation from "./components/Simulation";
 
 
 const App = () => {
@@ -48,7 +47,7 @@ const App = () => {
                                 </div>
                             } />
                             <Route path="/prediction" element={<PredictionScreen />} />
-                            <Route path="/simulation"  />
+                            <Route path="/simulation"  element={<Simulation /> }/>
                         </Routes>
                     </div>
                 </div>

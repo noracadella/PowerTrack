@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from django.db.models import Sum, F
+from decimal import Decimal, ROUND_HALF_UP
 
 from HourlyData.serializers import HourlyDataSerializer
 
@@ -132,12 +133,16 @@ class MonthlyConsumptionPriceView(ListAPIView):
         # Filtrar los datos del mes específico
         data = HourlyData.objects.filter(month=month)
 
-        # Calcular el consumo mensual multiplicando por los precios correspondientes
+        # Calcular el consumo mensual multiplicando por los precios correspondientes, ajustando la unidad de grid_price
         monthly_consumption = data.annotate(
-            grid_cost=F('site_consumption_grid_supply') * F('grid_price'),
+            grid_cost=F('site_consumption_grid_supply') * (F('grid_price') / 1000),  # Convertir €/MWh a €/kWh
         ).values('day').annotate(
             total_grid_cost=Sum('grid_cost'),
         )
+
+        for entry in monthly_consumption:
+            entry['total_grid_cost'] = Decimal(entry['total_grid_cost']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
 
         # Formatear los datos de la respuesta
         response_data = {
@@ -154,7 +159,7 @@ class YearlyConsumptionPriceView(ListAPIView):
 
         # Calcular el consumo anual multiplicando por los precios correspondientes
         yearly_consumption = data.annotate(
-            grid_cost=F('site_consumption_grid_supply') * F('grid_price')
+            grid_cost=F('site_consumption_grid_supply') * (F('grid_price') / 1000)
         ).values('month').annotate(
             total_grid_cost=Sum('grid_cost')
         ).order_by('month')
@@ -174,7 +179,7 @@ class HourlyConsumptionPriceView(ListAPIView):
 
         # Calcular el consumo por hora multiplicando por los precios correspondientes
         hourly_consumption = data.annotate(
-            grid_cost=F('site_consumption_grid_supply') * F('grid_price')
+            grid_cost=F('site_consumption_grid_supply') * (F('grid_price') / 1000)
         ).values('hour').annotate(
             total_grid_cost=Sum('grid_cost')
         ).order_by('hour')
