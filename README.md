@@ -36,3 +36,9 @@ pip list | grep llibreria
 npm install
 npm start
 ```
+
+## Autors
+Aina Pinyol
+Nora Caballero
+Jiahao Liu
+Sara Diaz
