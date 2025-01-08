@@ -67,8 +67,8 @@ const BarChartCard = ({ year, month, activeChart }) => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="Grid" stackId="a" fill="#1e5631" barSize={20} />
-                            <Bar dataKey="Solar" stackId="a" fill="#50b83c" barSize={20} />
+                            <Bar dataKey="Grid" name="Grid (kWh)" stackId="a" fill="#1e5631" barSize={20} />
+                            <Bar dataKey="Solar" name="Solar (kWh)" stackId="a" fill="#50b83c" barSize={20} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>

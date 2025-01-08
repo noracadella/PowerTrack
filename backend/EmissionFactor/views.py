@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from .models import  EmissionFactor
 from HourlyData.models import HourlyData
+from decimal import Decimal, ROUND_HALF_UP
 
 # Create your views here.
 """def EmissionFactor(request):
@@ -26,6 +27,10 @@ class MonthlyEmissionView(ListAPIView):
             ).values('day').annotate(
                 total_carbon_emission=Sum('carbon_emission')
             ).order_by('day')
+
+            for entry in daily_emissions:
+                entry['total_carbon_emission'] = Decimal(entry['total_carbon_emission']).quantize(Decimal('0.01'),
+                                                                                                    rounding=ROUND_HALF_UP)
 
             # Preparar los datos para la respuesta
             response_data = {
@@ -58,6 +63,10 @@ class HourlyEmissionView(ListAPIView):
                 total_carbon_emission=Sum('carbon_emission')
             ).order_by('hour')
 
+            for entry in hourly_emissions:
+                entry['total_carbon_emission'] = Decimal(entry['total_carbon_emission']).quantize(Decimal('0.01'),
+                                                                                                    rounding=ROUND_HALF_UP)
+
             # Preparar los datos para la respuesta
             response_data = {
                 "day": day,
@@ -88,6 +97,10 @@ class YearlyEmissionView(ListAPIView):
             ).values('month').annotate(
                 total_carbon_emission=Sum('carbon_emission')
             ).order_by('month')
+
+            for entry in monthly_emissions:
+                entry['total_carbon_emission'] = Decimal(entry['total_carbon_emission']).quantize(Decimal('0.01'),
+                                                                                                    rounding=ROUND_HALF_UP)
 
             # Preparar los datos para la respuesta
             response_data = {

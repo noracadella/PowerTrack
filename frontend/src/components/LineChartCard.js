@@ -61,7 +61,7 @@ const LineChartCard = ({activeChart}) => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="SolarProduction" stroke="#efca08" />
+                        <Line type="monotone" dataKey="SolarProduction" name="SolarProduction (kWh)" stroke="#efca08" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

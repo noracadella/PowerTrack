@@ -62,7 +62,7 @@ const BarChartPrice = ({ year, month, activeChart }) => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="GridCost" stackId="a" fill="#1e5631" barSize={20} />
+                        <Bar dataKey="GridCost" name="GridCost (€)" stackId="a" fill="#1e5631" barSize={20} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

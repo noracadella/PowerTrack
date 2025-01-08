@@ -65,7 +65,7 @@ const LineChartCard = ({ activeChart }) => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="CarbonEmission" stroke="#5e8c61" />
+                        <Line type="monotone" dataKey="CarbonEmission" name="CarbonEmission (gCO2eq)" stroke="#5e8c61" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

@@ -23,6 +23,10 @@ class MonthlySolarProductionView(ListAPIView):
             .annotate(total_solar_production=Sum('onsite_solar_system_production'))
         )
 
+        for entry in data:
+            entry['total_solar_production'] = Decimal(entry['total_solar_production']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
+
         response_data = {
             "month": month,
             "daily_totals": list(data)
@@ -37,6 +41,9 @@ class YearlySolarProductionView(ListAPIView):
             .annotate(total_solar_production=Sum('onsite_solar_system_production'))
             .order_by('month')
         )
+        for entry in data:
+            entry['total_solar_production'] = Decimal(entry['total_solar_production']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
 
         response_data = {
 
@@ -54,6 +61,9 @@ class DailySolarProductionView(ListAPIView):
                 total_solar_production=Sum('onsite_solar_system_production'))  # Sumar la producción solar por hora
             .order_by('hour')  # Ordenar por hora
         )
+        for entry in data:
+            entry['total_solar_production'] = Decimal(entry['total_solar_production']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
 
         # Construir la respuesta
         response_data = {
@@ -75,6 +85,11 @@ class HourlyConsumptionView(ListAPIView):
             )
             .order_by('hour')  # Ordenar por hora
         )
+        for entry in data:
+            entry['solar_supply'] = Decimal(entry['solar_supply']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
+            entry['grid_supply'] = Decimal(entry['grid_supply']).quantize(Decimal('0.01'),
+                                                                            rounding=ROUND_HALF_UP)
 
         # Construir la respuesta
         response_data = {
@@ -97,6 +112,11 @@ class MonthlyConsumptionView(ListAPIView):
             )
             .order_by('day')  # Ordenar por día
         )
+        for entry in data:
+            entry['total_solar'] = Decimal(entry['total_solar']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
+            entry['total_grid_supply'] = Decimal(entry['total_grid_supply']).quantize(Decimal('0.01'),
+                                                                            rounding=ROUND_HALF_UP)
 
         # Construir la respuesta
         response_data = {
@@ -118,6 +138,11 @@ class YearlyConsumptionView(ListAPIView):
             )
             .order_by('month')  # Ordenar por mes
         )
+        for entry in data:
+            entry['total_solar'] = Decimal(entry['total_solar']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
+            entry['total_grid_supply'] = Decimal(entry['total_grid_supply']).quantize(Decimal('0.01'),
+                                                                            rounding=ROUND_HALF_UP)
 
         # Construir la respuesta
         response_data = {
@@ -164,6 +189,10 @@ class YearlyConsumptionPriceView(ListAPIView):
             total_grid_cost=Sum('grid_cost')
         ).order_by('month')
 
+        for entry in yearly_consumption:
+            entry['total_grid_cost'] = Decimal(entry['total_grid_cost']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
+
         # Formatear los datos de la respuesta
         response_data = {
 
@@ -184,6 +213,9 @@ class HourlyConsumptionPriceView(ListAPIView):
             total_grid_cost=Sum('grid_cost')
         ).order_by('hour')
 
+        for entry in hourly_consumption:
+            entry['total_grid_cost'] = Decimal(entry['total_grid_cost']).quantize(Decimal('0.01'),
+                                                                                  rounding=ROUND_HALF_UP)
         # Formatear los datos de la respuesta
         response_data = {
             "day": day,
