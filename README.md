@@ -38,7 +38,11 @@ npm start
 ```
 
 ## Autors
+
 Aina Pinyol
+
 Nora Caballero
+
 Jiahao Liu
+
 Sara Diaz
