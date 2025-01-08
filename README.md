@@ -39,10 +39,10 @@ npm start
 
 ## Autors
 
-Aina Pinyol
+Aina Gomez
 
 Nora Caballero
 
 Jiahao Liu
 
-Sara Diaz
+Sara Díaz
